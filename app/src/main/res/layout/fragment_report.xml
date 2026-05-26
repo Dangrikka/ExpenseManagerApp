@@ -11,29 +11,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorSurface"
-        app:elevation="2dp">
+        app:elevation="@dimen/elevation_none">
 
         <TextView
+            style="?attr/textAppearanceHeadlineMedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="12dp"
-            android:text="Báo cáo tài chính"
-            android:textColor="?attr/colorOnSurface"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:layout_marginStart="@dimen/spacing_xl"
+            android:layout_marginTop="@dimen/spacing_xl"
+            android:layout_marginBottom="@dimen/spacing_md"
+            android:text="Báo cáo tài chính" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
+            style="?attr/tabStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorSurface"
-            app:tabIndicatorColor="?attr/colorPrimary"
-            app:tabIndicatorFullWidth="false"
-            app:tabIndicatorHeight="3dp"
-            app:tabSelectedTextColor="?attr/colorPrimary"
-            app:tabTextColor="?android:attr/textColorSecondary">
+            android:background="?attr/colorSurface">
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
@@ -47,44 +41,47 @@
         </com.google.android.material.tabs.TabLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
+    <!-- MONTH SELECTOR -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:paddingTop="20dp"
-        android:paddingBottom="12dp">
+        android:paddingTop="@dimen/spacing_xl"
+        android:paddingBottom="@dimen/spacing_md">
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             app:cardBackgroundColor="?attr/colorSurface"
-            app:cardCornerRadius="24dp"
-            app:cardElevation="2dp"
-            app:strokeWidth="0dp">
+            app:cardCornerRadius="@dimen/radius_xl"
+            app:cardElevation="@dimen/elevation_sm"
+            app:strokeWidth="1dp"
+            app:strokeColor="?attr/colorOutlineVariant">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="4dp">
+                android:paddingHorizontal="@dimen/spacing_xs"
+                android:paddingVertical="@dimen/spacing_xs">
 
                 <ImageButton
                     android:id="@+id/btnPrevMonth"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:src="@android:drawable/ic_media_previous"
-                    app:tint="?attr/colorOnSurface" />
+                    android:src="@drawable/ic_chevron_left"
+                    app:tint="?attr/colorPrimary" />
 
                 <TextView
                     android:id="@+id/tvCurrentMonth"
-                    android:layout_width="120dp"
+                    android:layout_width="140dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="Tháng 05/2026"
-                    android:textColor="?attr/colorOnSurface"
+                    android:textColor="?attr/colorPrimary"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -93,8 +90,8 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:src="@android:drawable/ic_media_next"
-                    app:tint="?attr/colorOnSurface" />
+                    android:src="@drawable/ic_chevron_right"
+                    app:tint="?attr/colorPrimary" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
@@ -103,13 +100,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <!-- TAB 1: TÀI KHOẢN -->
         <androidx.core.widget.NestedScrollView
             android:id="@+id/layoutAccount"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fillViewport="true"
             android:clipToPadding="false"
-            android:paddingHorizontal="20dp"
+            android:fillViewport="true"
+            android:paddingHorizontal="@dimen/spacing_xl"
             android:paddingBottom="100dp"
             android:visibility="visible">
 
@@ -119,41 +117,35 @@
                 android:orientation="vertical">
 
                 <com.google.android.material.card.MaterialCardView
+                    style="?attr/materialCardViewStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cardBackgroundColor="?attr/colorSurface"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="4dp"
-                    app:strokeWidth="0dp">
+                    android:layout_height="wrap_content">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="24dp">
+                        android:padding="@dimen/spacing_xxl">
 
                         <TextView
+                            style="?attr/textAppearanceBodyMedium"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Tài sản ròng (Số dư)"
-                            android:textColor="?android:attr/textColorSecondary"
-                            android:textSize="14sp" />
+                            android:text="Tài sản ròng (Số dư)" />
 
                         <TextView
                             android:id="@+id/tvNetWorth"
+                            style="?attr/textAppearanceHeadlineLarge"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="0 đ"
-                            android:textColor="?attr/colorOnSurface"
-                            android:textSize="32sp"
-                            android:textStyle="bold" />
+                            android:layout_marginTop="@dimen/spacing_xs"
+                            android:text="0 đ" />
 
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:layout_marginVertical="16dp"
-                            android:background="#1F888888" />
+                            android:layout_marginVertical="@dimen/spacing_lg"
+                            android:background="@color/divider_color" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -169,21 +161,19 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    style="?attr/textAppearanceLabelSmall"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Tổng thu"
-                                    android:textColor="?android:attr/textColorSecondary"
-                                    android:textSize="13sp" />
+                                    android:text="Tổng thu" />
 
                                 <TextView
                                     android:id="@+id/tvTotalIncome"
+                                    style="?attr/textAppearanceTitleMedium"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="2dp"
+                                    android:layout_marginTop="@dimen/spacing_xs"
                                     android:text="+0 đ"
-                                    android:textColor="#4CAF50"
-                                    android:textSize="16sp"
-                                    android:textStyle="bold" />
+                                    android:textColor="@color/color_income" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -193,112 +183,132 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    style="?attr/textAppearanceLabelSmall"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Tổng chi"
-                                    android:textColor="?android:attr/textColorSecondary"
-                                    android:textSize="13sp" />
+                                    android:text="Tổng chi" />
 
                                 <TextView
                                     android:id="@+id/tvTotalExpense"
+                                    style="?attr/textAppearanceTitleMedium"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="2dp"
+                                    android:layout_marginTop="@dimen/spacing_xs"
                                     android:text="-0 đ"
-                                    android:textColor="#F44336"
-                                    android:textSize="16sp"
-                                    android:textStyle="bold" />
+                                    android:textColor="@color/color_expense" />
                             </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
+                <!-- NEW BAR CHART FOR REPORT SCREEN -->
+                <com.google.android.material.card.MaterialCardView
+                    style="?attr/materialCardViewStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_lg">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/spacing_lg">
+
+                        <TextView
+                            style="?attr/textAppearanceTitleMedium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/spacing_md"
+                            android:text="Biến động thu chi" />
+
+                        <!-- Bar chart placeholder -> MPAndroidChart BarChart -->
+                        <com.github.mikephil.charting.charts.BarChart
+                            android:id="@+id/barChart"
+                            android:layout_width="match_parent"
+                            android:layout_height="250dp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
+        <!-- TAB 2: PHÂN TÍCH -->
         <LinearLayout
             android:id="@+id/layoutAnalysis"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:paddingHorizontal="20dp"
+            android:paddingHorizontal="@dimen/spacing_xl"
             android:visibility="gone">
 
+            <!-- AI ANALYSIS CARD -->
             <com.google.android.material.card.MaterialCardView
+                style="?attr/materialCardViewStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="0dp"
-                app:strokeColor="#1F888888"
-                app:strokeWidth="1dp"
+                android:layout_marginBottom="@dimen/spacing_lg"
                 app:cardBackgroundColor="?attr/colorPrimaryContainer">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="@dimen/spacing_lg">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
                         <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
+                            android:layout_width="@dimen/icon_md"
+                            android:layout_height="@dimen/icon_md"
                             android:src="@android:drawable/ic_dialog_info"
                             app:tint="?attr/colorPrimary" />
 
                         <TextView
+                            style="?attr/textAppearanceTitleMedium"
                             android:layout_width="0dp"
-                            android:layout_weight="1"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
+                            android:layout_marginStart="@dimen/spacing_sm"
+                            android:layout_weight="1"
                             android:text="PHÂN TÍCH BÁO CÁO AI"
-                            android:textColor="?attr/colorPrimary"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
+                            android:textColor="?attr/colorPrimary" />
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnAnalyzeAI"
-                            style="@style/Widget.MaterialComponents.Button.TextButton"
+                            style="@style/Widget.App.Button.Text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Phân tích"
-                            android:textColor="?attr/colorPrimary" />
+                            android:text="Phân tích" />
                     </LinearLayout>
 
                     <TextView
                         android:id="@+id/tvAiAdvice"
+                        style="?attr/textAppearanceBodyMedium"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/spacing_xs"
+                        android:lineSpacingExtra="4dp"
                         android:text="Nhấn 'Phân tích' để AI đánh giá báo cáo chi tiêu của bạn nhé!"
-                        android:textColor="?attr/colorOnSurface"
-                        android:textSize="14sp"
-                        android:lineSpacingExtra="4dp"/>
+                        android:textColor="?attr/colorOnSurface" />
 
                     <ProgressBar
                         android:id="@+id/pbAiLoading"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
+                        android:layout_width="@dimen/icon_lg"
+                        android:layout_height="@dimen/icon_lg"
                         android:layout_gravity="center"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/spacing_sm"
                         android:visibility="gone" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
             <TextView
+                style="?attr/textAppearanceTitleLarge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:text="Chi tiết từng hạng mục"
-                android:textColor="?attr/colorOnSurface"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:layout_marginBottom="@dimen/spacing_md"
+                android:text="Chi tiết từng hạng mục" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvCategoryStats"

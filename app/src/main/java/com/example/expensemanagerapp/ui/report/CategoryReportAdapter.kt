@@ -20,7 +20,6 @@ data class CategoryReport(
 
 class CategoryReportAdapter : ListAdapter<CategoryReport, CategoryReportAdapter.ViewHolder>(DiffCallback) {
 
-    private val currencyFormat = NumberFormat.getCurrencyInstance(Locale.forLanguageTag("vi-VN"))
     private val categoryColorMap = mapOf(
         "Ăn uống" to "#F44336",   // Đỏ
         "Đi lại" to "#2196F3",    // Xanh dương
@@ -50,7 +49,7 @@ class CategoryReportAdapter : ListAdapter<CategoryReport, CategoryReportAdapter.
         fun bind(item: CategoryReport) {
             // Đổ dữ liệu chữ
             binding.tvCategoryName.text = item.name
-            binding.tvCategoryAmount.text = currencyFormat.format(item.amount)
+            binding.tvCategoryAmount.text = com.example.expensemanager.utils.CurrencyUtils.formatCurrency(binding.root.context, item.amount)
             binding.tvCategoryPercent.text = "${String.format("%.1f", item.percent)}%"
 
             val hexColor = categoryColorMap[item.name] ?: fallbackPalette[abs(item.name.hashCode()) % fallbackPalette.size]

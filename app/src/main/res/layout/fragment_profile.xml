@@ -10,113 +10,113 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:padding="@dimen/spacing_xl">
 
+        <!-- HEADER / AVATAR CARD -->
         <com.google.android.material.card.MaterialCardView
+            style="?attr/materialCardViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            app:cardCornerRadius="24dp"
-            app:cardElevation="0dp"
-            app:strokeWidth="0dp"
-            app:cardBackgroundColor="?attr/colorSurface">
+            android:layout_marginBottom="@dimen/spacing_xxl">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:padding="24dp">
+                android:padding="@dimen/spacing_xxl">
 
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    app:cardCornerRadius="50dp"
-                    app:cardElevation="4dp"
-                    app:strokeWidth="0dp">
+                <!-- Avatar with gradient border -->
+                <FrameLayout
+                    android:layout_width="@dimen/icon_avatar"
+                    android:layout_height="@dimen/icon_avatar"
+                    android:background="@drawable/shape_circle_icon"
+                    android:backgroundTint="?attr/colorPrimary">
 
-                    <ImageView
-                        android:id="@+id/ivAvatar"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        android:background="?attr/colorSurfaceVariant"
-                        android:src="@android:drawable/ic_menu_camera" />
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="94dp"
+                        android:layout_height="94dp"
+                        android:layout_gravity="center"
+                        app:cardCornerRadius="@dimen/radius_full"
+                        app:cardElevation="0dp"
+                        app:strokeWidth="0dp">
 
-                </com.google.android.material.card.MaterialCardView>
+                        <ImageView
+                            android:id="@+id/ivAvatar"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="?attr/colorSurfaceVariant"
+                            android:scaleType="centerCrop"
+                            android:src="@android:drawable/ic_menu_camera" />
+                    </com.google.android.material.card.MaterialCardView>
+                </FrameLayout>
 
                 <TextView
                     android:id="@+id/tvUserName"
+                    style="?attr/textAppearanceTitleLarge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="Chào bạn, Khách!"
-                    android:textColor="?attr/colorOnSurface"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:paddingHorizontal="12dp"
-                    android:paddingVertical="4dp"
+                    android:layout_marginTop="@dimen/spacing_lg"
                     android:background="?attr/selectableItemBackground"
                     android:clickable="true"
-                    android:focusable="true"/>
+                    android:focusable="true"
+                    android:paddingHorizontal="@dimen/spacing_md"
+                    android:paddingVertical="@dimen/spacing_xs"
+                    android:text="Chào bạn, Khách!" />
 
                 <TextView
                     android:id="@+id/tvUserEmail"
+                    style="?attr/textAppearanceBodyMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="Đăng nhập để bảo mật dữ liệu của bạn"
-                    android:textColor="?android:attr/textColorSecondary"
-                    android:textSize="14sp" />
+                    android:text="Đăng nhập để bảo mật dữ liệu của bạn" />
 
+                <!-- AUTH BUTTONS -->
                 <LinearLayout
                     android:id="@+id/layoutAuthButtons"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="@dimen/spacing_xxl"
                     android:orientation="horizontal">
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnLogin"
+                        style="@style/Widget.App.Button.Gradient"
                         android:layout_width="0dp"
-                        android:layout_height="54dp"
+                        android:layout_height="@dimen/button_height_md"
+                        android:layout_marginEnd="@dimen/spacing_xs"
                         android:layout_weight="1"
-                        android:layout_marginEnd="6dp"
-                        android:text="Đăng nhập"
-                        android:textStyle="bold"
-                        app:cornerRadius="16dp" />
+                        android:text="Đăng nhập" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnRegister"
-                        style="@style/Widget.Material3.Button.TonalButton"
+                        style="?attr/materialButtonOutlinedStyle"
                         android:layout_width="0dp"
-                        android:layout_height="54dp"
+                        android:layout_height="@dimen/button_height_md"
+                        android:layout_marginStart="@dimen/spacing_xs"
                         android:layout_weight="1"
-                        android:layout_marginStart="6dp"
                         android:text="Đăng ký"
-                        android:textStyle="bold"
-                        app:cornerRadius="16dp" />
+                        app:cornerRadius="@dimen/radius_lg" />
                 </LinearLayout>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
+        <!-- APP & DATA SECTION -->
         <TextView
+            style="?attr/textAppearanceLabelSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="Ứng dụng &amp; Dữ liệu"
-            android:textColor="?attr/colorPrimary"
-            android:textSize="14sp"
-            android:textStyle="bold" />
+            android:layout_marginStart="@dimen/spacing_md"
+            android:layout_marginBottom="@dimen/spacing_sm"
+            android:text="ỨNG DỤNG &amp; DỮ LIỆU"
+            android:textColor="?attr/colorPrimary" />
 
         <com.google.android.material.card.MaterialCardView
+            style="?attr/materialCardViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="0dp"
-            app:strokeWidth="0dp"
-            app:cardBackgroundColor="?attr/colorSurface">
+            android:layout_marginBottom="@dimen/spacing_xxl">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -125,75 +125,71 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnSyncCloud"
-                    style="@style/Widget.Material3.Button.TextButton"
+                    style="@style/Widget.App.Button.Text"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="@dimen/button_height_lg"
                     android:gravity="start|center_vertical"
                     android:text="Đồng bộ dữ liệu (Cloud Sync)"
                     android:textColor="?attr/colorOnSurface"
                     app:icon="@android:drawable/ic_popup_sync"
                     app:iconGravity="textStart"
-                    app:iconPadding="16dp"
-                    app:iconTint="#4CAF50" />
+                    app:iconPadding="@dimen/spacing_lg"
+                    app:iconTint="@color/color_success" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginStart="60dp"
-                    android:background="#1F888888" />
+                    android:layout_marginStart="64dp"
+                    android:background="@color/divider_color" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnExport"
-                    style="@style/Widget.Material3.Button.TextButton"
+                    style="@style/Widget.App.Button.Text"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="@dimen/button_height_lg"
                     android:gravity="start|center_vertical"
                     android:text="Xuất báo cáo (Excel/CSV)"
                     android:textColor="?attr/colorOnSurface"
                     app:icon="@android:drawable/ic_menu_save"
                     app:iconGravity="textStart"
-                    app:iconPadding="16dp"
+                    app:iconPadding="@dimen/spacing_lg"
                     app:iconTint="?attr/colorOnSurface" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginStart="60dp"
-                    android:background="#1F888888" />
+                    android:layout_marginStart="64dp"
+                    android:background="@color/divider_color" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnSettings"
-                    style="@style/Widget.Material3.Button.TextButton"
+                    style="@style/Widget.App.Button.Text"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="@dimen/button_height_lg"
                     android:gravity="start|center_vertical"
                     android:text="Cài đặt hệ thống"
                     android:textColor="?attr/colorOnSurface"
                     app:icon="@android:drawable/ic_menu_preferences"
                     app:iconGravity="textStart"
-                    app:iconPadding="16dp"
+                    app:iconPadding="@dimen/spacing_lg"
                     app:iconTint="?attr/colorOnSurface" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
+        <!-- SUPPORT & ACCOUNT SECTION -->
         <TextView
+            style="?attr/textAppearanceLabelSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="8dp"
-            android:text="Hỗ trợ &amp; Tài khoản"
-            android:textColor="?attr/colorPrimary"
-            android:textSize="14sp"
-            android:textStyle="bold" />
+            android:layout_marginStart="@dimen/spacing_md"
+            android:layout_marginBottom="@dimen/spacing_sm"
+            android:text="HỖ TRỢ &amp; TÀI KHOẢN"
+            android:textColor="?attr/colorPrimary" />
 
         <com.google.android.material.card.MaterialCardView
+            style="?attr/materialCardViewStyle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="0dp"
-            app:strokeWidth="0dp"
-            app:cardBackgroundColor="?attr/colorSurface">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -202,48 +198,48 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnFeedback"
-                    style="@style/Widget.Material3.Button.TextButton"
+                    style="@style/Widget.App.Button.Text"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="@dimen/button_height_lg"
                     android:gravity="start|center_vertical"
                     android:text="Gửi góp ý &amp; Báo lỗi"
                     android:textColor="?attr/colorOnSurface"
                     app:icon="@android:drawable/ic_menu_send"
                     app:iconGravity="textStart"
-                    app:iconPadding="16dp"
+                    app:iconPadding="@dimen/spacing_lg"
                     app:iconTint="?attr/colorOnSurface" />
 
                 <View
                     android:id="@+id/dividerLogout"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginStart="60dp"
-                    android:background="#1F888888" />
+                    android:layout_marginStart="64dp"
+                    android:background="@color/divider_color" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnLogout"
-                    style="@style/Widget.Material3.Button.TextButton"
+                    style="@style/Widget.App.Button.Text"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="@dimen/button_height_lg"
                     android:gravity="start|center_vertical"
                     android:text="Đăng xuất"
-                    android:textColor="#E53935"
+                    android:textColor="@color/md_theme_error"
                     app:icon="@android:drawable/ic_lock_power_off"
                     app:iconGravity="textStart"
-                    app:iconPadding="16dp"
-                    app:iconTint="#E53935" />
+                    app:iconPadding="@dimen/spacing_lg"
+                    app:iconTint="@color/md_theme_error" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
+        <!-- FOOTER -->
         <TextView
+            style="?attr/textAppearanceLabelSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="40dp"
+            android:layout_marginTop="@dimen/spacing_xxxl"
+            android:layout_marginBottom="@dimen/spacing_xxxxl"
             android:gravity="center"
-            android:text="Phiên bản 1.0.0\nExpense Manager"
-            android:textColor="?android:attr/textColorSecondary"
-            android:textSize="12sp" />
+            android:text="Phiên bản 2.0.0\nExpense Manager" />
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

@@ -1,14 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="md_theme_primary">#006C4C</color>
+    <!-- ============================================== -->
+    <!--          MATERIAL 3 COLOR SYSTEM               -->
+    <!-- ============================================== -->
+
+    <!-- Primary – Indigo Blue -->
+    <color name="md_theme_primary">#4F46E5</color>
     <color name="md_theme_onPrimary">#FFFFFF</color>
-    <color name="md_theme_primaryContainer">#89F8C7</color>
-    <color name="md_theme_onPrimaryContainer">#002114</color>
+    <color name="md_theme_primaryContainer">#E0E7FF</color>
+    <color name="md_theme_onPrimaryContainer">#312E81</color>
 
-    <color name="md_theme_background">#FBFDF9</color>
-    <color name="md_theme_onBackground">#191C1A</color>
-    <color name="md_theme_surface">#FBFDF9</color>
-    <color name="md_theme_onSurface">#191C1A</color>
-    <color name="md_theme_surfaceVariant">#DBE5DD</color>
+    <!-- Secondary – Violet -->
+    <color name="md_theme_secondary">#7C3AED</color>
+    <color name="md_theme_onSecondary">#FFFFFF</color>
+    <color name="md_theme_secondaryContainer">#EDE9FE</color>
+    <color name="md_theme_onSecondaryContainer">#4C1D95</color>
 
-    <color name="color_income">#2E7D32</color> <color name="color_expense">#D32F2F</color> <color name="color_balance">#1565C0</color> </resources>
+    <!-- Tertiary – Teal -->
+    <color name="md_theme_tertiary">#0D9488</color>
+    <color name="md_theme_onTertiary">#FFFFFF</color>
+    <color name="md_theme_tertiaryContainer">#CCFBF1</color>
+    <color name="md_theme_onTertiaryContainer">#134E4A</color>
+
+    <!-- Background & Surface -->
+    <color name="md_theme_background">#F8FAFC</color>
+    <color name="md_theme_onBackground">#0F172A</color>
+    <color name="md_theme_surface">#FFFFFF</color>
+    <color name="md_theme_onSurface">#0F172A</color>
+    <color name="md_theme_surfaceVariant">#F1F5F9</color>
+    <color name="md_theme_onSurfaceVariant">#475569</color>
+    <color name="md_theme_surfaceContainer">#F1F5F9</color>
+    <color name="md_theme_surfaceContainerHigh">#E2E8F0</color>
+    <color name="md_theme_surfaceContainerHighest">#CBD5E1</color>
+
+    <!-- Outline -->
+    <color name="md_theme_outline">#CBD5E1</color>
+    <color name="md_theme_outlineVariant">#E2E8F0</color>
+
+    <!-- Error -->
+    <color name="md_theme_error">#DC2626</color>
+    <color name="md_theme_onError">#FFFFFF</color>
+    <color name="md_theme_errorContainer">#FEE2E2</color>
+    <color name="md_theme_onErrorContainer">#991B1B</color>
+
+    <!-- ============================================== -->
+    <!--          SEMANTIC / FUNCTIONAL COLORS           -->
+    <!-- ============================================== -->
+
+    <!-- Income / Expense / Balance -->
+    <color name="color_income">#10B981</color>
+    <color name="color_income_light">#D1FAE5</color>
+    <color name="color_income_dark">#065F46</color>
+    <color name="color_expense">#EF4444</color>
+    <color name="color_expense_light">#FEE2E2</color>
+    <color name="color_expense_dark">#991B1B</color>
+    <color name="color_balance">#4F46E5</color>
+
+    <!-- Warning / Info / Success -->
+    <color name="color_warning">#F59E0B</color>
+    <color name="color_warning_light">#FEF3C7</color>
+    <color name="color_info">#3B82F6</color>
+    <color name="color_info_light">#DBEAFE</color>
+    <color name="color_success">#10B981</color>
+    <color name="color_success_light">#D1FAE5</color>
+
+    <!-- ============================================== -->
+    <!--          GRADIENT STOP COLORS                  -->
+    <!-- ============================================== -->
+    <color name="gradient_primary_start">#4F46E5</color>
+    <color name="gradient_primary_end">#7C3AED</color>
+    <color name="gradient_income_start">#10B981</color>
+    <color name="gradient_income_end">#059669</color>
+    <color name="gradient_expense_start">#EF4444</color>
+    <color name="gradient_expense_end">#DC2626</color>
+    <color name="gradient_splash_start">#312E81</color>
+    <color name="gradient_splash_center">#4F46E5</color>
+    <color name="gradient_splash_end">#7C3AED</color>
+
+    <!-- ============================================== -->
+    <!--          UI ELEMENT COLORS                     -->
+    <!-- ============================================== -->
+    <color name="divider_color">#1F94A3B8</color>
+    <color name="card_shadow">#0A000000</color>
+    <color name="text_primary">#0F172A</color>
+    <color name="text_secondary">#64748B</color>
+    <color name="text_hint">#94A3B8</color>
+    <color name="text_on_gradient">#FFFFFF</color>
+    <color name="text_on_gradient_secondary">#E0E7FF</color>
+    <color name="icon_default">#64748B</color>
+    <color name="icon_active">#4F46E5</color>
+    <color name="input_bg">#F1F5F9</color>
+    <color name="input_bg_focused">#E0E7FF</color>
+    <color name="ripple_primary">#1A4F46E5</color>
+    <color name="chip_bg">#E0E7FF</color>
+    <color name="chip_text">#4F46E5</color>
+    <color name="badge_bg">#EF4444</color>
+    <color name="shimmer_base">#E2E8F0</color>
+    <color name="shimmer_highlight">#F8FAFC</color>
+</resources>

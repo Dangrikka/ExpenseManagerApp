@@ -1,125 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8F9FA"
+    android:background="?android:attr/colorBackground"
     android:orientation="vertical">
 
-    <com.google.android.material.card.MaterialCardView
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardElevation="4dp"
-        app:strokeWidth="0dp">
+        android:background="?attr/colorSurface"
+        app:elevation="@dimen/elevation_none">
 
+        <!-- SEARCH BAR CONTAINER -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="12dp">
+            android:gravity="center_vertical"
+            android:paddingHorizontal="@dimen/spacing_lg"
+            android:paddingVertical="@dimen/spacing_md">
 
             <ImageView
                 android:id="@+id/ivBack"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:padding="4dp"
-                android:src="@drawable/ic_arrow_back"
-                app:tint="#212121" />
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginStart="12dp"
-                android:src="@android:drawable/ic_menu_search"
-                app:tint="#9E9E9E" />
-
-            <EditText
-                android:id="@+id/etSearch"
-                android:layout_width="0dp"
+                android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_marginStart="8dp" android:layout_marginEnd="12dp"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:hint="Tìm kiếm giao dịch..."
-                android:imeOptions="actionSearch"
-                android:inputType="text"
-                android:maxLines="1"
-                android:textColor="#212121"
-                android:textColorHint="#9E9E9E"
-                android:textSize="16sp" />
-
-            <ImageView
-                android:id="@+id/ivClear"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
+                android:padding="12dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:padding="4dp"
-                android:src="@android:drawable/ic_menu_close_clear_cancel"
-                android:visibility="gone"
-                app:tint="#757575" />
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
+                android:src="@drawable/ic_arrow_back"
+                app:tint="?attr/colorOnSurface"
+                android:stateListAnimator="@animator/scale_press" />
 
-    <LinearLayout
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:layout_marginStart="@dimen/spacing_md"
+                app:cardBackgroundColor="@color/input_bg"
+                app:cardCornerRadius="@dimen/radius_full"
+                app:cardElevation="@dimen/elevation_none"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="@dimen/spacing_md">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_search_vector"
+                        app:tint="@color/icon_default" />
+
+                    <EditText
+                        android:id="@+id/etSearch"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginStart="@dimen/spacing_sm"
+                        android:background="@null"
+                        android:hint="Tìm kiếm giao dịch..."
+                        android:imeOptions="actionSearch"
+                        android:inputType="text"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textColorHint="@color/text_hint"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/ivClear"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@android:drawable/ic_menu_close_clear_cancel"
+                        app:tint="@color/icon_default"
+                        android:visibility="gone"
+                        android:background="?attr/selectableItemBackgroundBorderless" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- CHIP SUGGESTIONS -->
+    <HorizontalScrollView
         android:id="@+id/layoutSuggestions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp"
-        android:visibility="visible">
+        android:scrollbars="none"
+        android:paddingVertical="@dimen/spacing_md"
+        android:paddingHorizontal="@dimen/spacing_md"
+        android:background="?attr/colorSurface"
+        android:elevation="@dimen/elevation_sm"
+        android:clipToPadding="false">
 
-        <TextView
+        <com.google.android.material.chip.ChipGroup
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:text="Gợi ý tìm kiếm"
-            android:textColor="#757575"
-            android:textSize="14sp"
-            android:textStyle="bold" />
+            app:singleLine="true">
 
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="none">
-
-            <com.google.android.material.chip.ChipGroup
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipFood"
+                style="?attr/chipStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:singleLine="true">
+                android:text="Ăn uống" />
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipFood"
-                    style="@style/Widget.MaterialComponents.Chip.Action"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Ăn uống" />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipShopping"
+                style="?attr/chipStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mua sắm" />
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipShopping"
-                    style="@style/Widget.MaterialComponents.Chip.Action"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Mua sắm" />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipTravel"
+                style="?attr/chipStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Di chuyển" />
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipTravel"
-                    style="@style/Widget.MaterialComponents.Chip.Action"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Đi lại" />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipIncome"
+                style="?attr/chipStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thu nhập"
+                app:chipBackgroundColor="@color/color_income_light"
+                android:textColor="@color/color_income_dark"/>
+        </com.google.android.material.chip.ChipGroup>
+    </HorizontalScrollView>
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipIncome"
-                    style="@style/Widget.MaterialComponents.Chip.Action"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Lương" />
-            </com.google.android.material.chip.ChipGroup>
-        </HorizontalScrollView>
-    </LinearLayout>
-
+    <!-- EMPTY STATE -->
     <LinearLayout
         android:id="@+id/emptyStateLayout"
         android:layout_width="match_parent"
@@ -129,27 +141,28 @@
         android:visibility="gone">
 
         <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/ic_search"
-            app:tint="#BDBDBD" />
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_search_vector"
+            app:tint="?attr/colorSurfaceVariant" />
 
         <TextView
+            style="?attr/textAppearanceBodyLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Không tìm thấy kết quả nào"
-            android:textColor="#9E9E9E"
-            android:textSize="16sp" />
+            android:layout_marginTop="@dimen/spacing_md"
+            android:text="Không tìm thấy kết quả"
+            android:textColor="@color/text_hint" />
     </LinearLayout>
 
+    <!-- SEARCH RESULTS -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSearchResults"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
-        android:paddingTop="8dp"
-        android:paddingBottom="80dp"
-        android:visibility="gone" />
+        android:padding="@dimen/spacing_lg"
+        android:layoutAnimation="@anim/layout_animation_fall_down"
+        tools:listitem="@layout/item_transaction" />
 
 </LinearLayout>

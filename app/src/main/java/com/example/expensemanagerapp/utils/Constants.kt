@@ -15,6 +15,6 @@ object Constants {
     const val NOTIFICATION_CHANNEL_ID = "expense_reminder_channel"
     const val NOTIFICATION_ID = 1
 
-    const val GROQ_API_KEY = ""
+    const val GROQ_API_KEY = "YOUR_GROQ_API_KEY_HERE"
 
 }

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ============================================== -->
+    <!--       DARK MODE – MATERIAL 3 COLORS            -->
+    <!-- ============================================== -->
+
+    <!-- Primary – Indigo Blue (lighter for dark bg) -->
+    <color name="md_theme_primary">#818CF8</color>
+    <color name="md_theme_onPrimary">#1E1B4B</color>
+    <color name="md_theme_primaryContainer">#3730A3</color>
+    <color name="md_theme_onPrimaryContainer">#E0E7FF</color>
+
+    <!-- Secondary – Violet -->
+    <color name="md_theme_secondary">#A78BFA</color>
+    <color name="md_theme_onSecondary">#2E1065</color>
+    <color name="md_theme_secondaryContainer">#5B21B6</color>
+    <color name="md_theme_onSecondaryContainer">#EDE9FE</color>
+
+    <!-- Tertiary – Teal -->
+    <color name="md_theme_tertiary">#5EEAD4</color>
+    <color name="md_theme_onTertiary">#042F2E</color>
+    <color name="md_theme_tertiaryContainer">#115E59</color>
+    <color name="md_theme_onTertiaryContainer">#CCFBF1</color>
+
+    <!-- Background & Surface -->
+    <color name="md_theme_background">#0F172A</color>
+    <color name="md_theme_onBackground">#E2E8F0</color>
+    <color name="md_theme_surface">#1E293B</color>
+    <color name="md_theme_onSurface">#E2E8F0</color>
+    <color name="md_theme_surfaceVariant">#1E293B</color>
+    <color name="md_theme_onSurfaceVariant">#94A3B8</color>
+    <color name="md_theme_surfaceContainer">#1E293B</color>
+    <color name="md_theme_surfaceContainerHigh">#334155</color>
+    <color name="md_theme_surfaceContainerHighest">#475569</color>
+
+    <!-- Outline -->
+    <color name="md_theme_outline">#475569</color>
+    <color name="md_theme_outlineVariant">#334155</color>
+
+    <!-- Error -->
+    <color name="md_theme_error">#FCA5A5</color>
+    <color name="md_theme_onError">#7F1D1D</color>
+    <color name="md_theme_errorContainer">#991B1B</color>
+    <color name="md_theme_onErrorContainer">#FEE2E2</color>
+
+    <!-- ============================================== -->
+    <!--          SEMANTIC / FUNCTIONAL COLORS           -->
+    <!-- ============================================== -->
+    <color name="color_income">#34D399</color>
+    <color name="color_income_light">#064E3B</color>
+    <color name="color_income_dark">#A7F3D0</color>
+    <color name="color_expense">#FCA5A5</color>
+    <color name="color_expense_light">#7F1D1D</color>
+    <color name="color_expense_dark">#FEE2E2</color>
+    <color name="color_balance">#818CF8</color>
+
+    <color name="color_warning">#FBBF24</color>
+    <color name="color_warning_light">#78350F</color>
+    <color name="color_info">#60A5FA</color>
+    <color name="color_info_light">#1E3A5F</color>
+    <color name="color_success">#34D399</color>
+    <color name="color_success_light">#064E3B</color>
+
+    <!-- ============================================== -->
+    <!--          GRADIENT STOP COLORS                  -->
+    <!-- ============================================== -->
+    <color name="gradient_primary_start">#4F46E5</color>
+    <color name="gradient_primary_end">#7C3AED</color>
+    <color name="gradient_income_start">#10B981</color>
+    <color name="gradient_income_end">#059669</color>
+    <color name="gradient_expense_start">#EF4444</color>
+    <color name="gradient_expense_end">#DC2626</color>
+    <color name="gradient_splash_start">#1E1B4B</color>
+    <color name="gradient_splash_center">#312E81</color>
+    <color name="gradient_splash_end">#4C1D95</color>
+
+    <!-- ============================================== -->
+    <!--          UI ELEMENT COLORS                     -->
+    <!-- ============================================== -->
+    <color name="divider_color">#1F475569</color>
+    <color name="card_shadow">#33000000</color>
+    <color name="text_primary">#E2E8F0</color>
+    <color name="text_secondary">#94A3B8</color>
+    <color name="text_hint">#64748B</color>
+    <color name="text_on_gradient">#FFFFFF</color>
+    <color name="text_on_gradient_secondary">#C7D2FE</color>
+    <color name="icon_default">#94A3B8</color>
+    <color name="icon_active">#818CF8</color>
+    <color name="input_bg">#1E293B</color>
+    <color name="input_bg_focused">#312E81</color>
+    <color name="ripple_primary">#1A818CF8</color>
+    <color name="chip_bg">#312E81</color>
+    <color name="chip_text">#C7D2FE</color>
+    <color name="badge_bg">#EF4444</color>
+    <color name="shimmer_base">#334155</color>
+    <color name="shimmer_highlight">#475569</color>
+</resources>

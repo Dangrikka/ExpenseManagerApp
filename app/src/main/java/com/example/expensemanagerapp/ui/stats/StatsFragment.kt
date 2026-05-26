@@ -31,7 +31,6 @@ class StatsFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: StatsViewModel by viewModels()
-    private val currencyFormat = NumberFormat.getCurrencyInstance(Locale("vi", "VN"))
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -81,9 +80,9 @@ class StatsFragment : Fragment() {
                         is Resource.Loading -> {}
                         is Resource.Success -> {
                             resource.data?.let { stats ->
-                                binding.tvBalance.text = currencyFormat.format(stats.balance)
-                                binding.tvTotalIncome.text = "+ ${currencyFormat.format(stats.totalIncome)}"
-                                binding.tvTotalExpense.text = "- ${currencyFormat.format(stats.totalExpense)}"
+                                binding.tvBalance.text = com.example.expensemanager.utils.CurrencyUtils.formatCurrency(requireContext(), stats.balance)
+                                binding.tvTotalIncome.text = "+ ${com.example.expensemanager.utils.CurrencyUtils.formatCurrency(requireContext(), stats.totalIncome)}"
+                                binding.tvTotalExpense.text = "- ${com.example.expensemanager.utils.CurrencyUtils.formatCurrency(requireContext(), stats.totalExpense)}"
                                 setupPieChart(stats.expenseByCategory)
                             }
                         }

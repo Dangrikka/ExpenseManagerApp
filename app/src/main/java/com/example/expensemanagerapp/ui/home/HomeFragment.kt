@@ -13,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.expensemanager.R
 import com.example.expensemanager.databinding.FragmentHomeBinding
 import com.example.expensemanager.domain.model.TransactionModel
@@ -37,7 +38,6 @@ class HomeFragment : Fragment() {
     private lateinit var transactionAdapter: TransactionAdapter
 
     private var selectedCalendar = Calendar.getInstance()
-    private val currencyFormat = NumberFormat.getCurrencyInstance(Locale("vi", "VN"))
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -85,6 +85,46 @@ class HomeFragment : Fragment() {
         binding.ivMenu.setOnClickListener {
             showSettingsDialog()
         }
+        var dX = 0f
+        var dY = 0f
+        var initialX = 0f
+        var initialY = 0f
+        val CLICK_DRAG_TOLERANCE = 15f // Sai số pixel để phân biệt giữa "Bấm" và "Kéo"
+
+        binding.fabAiChat.setOnTouchListener { view, event ->
+            when (event.actionMasked) {
+                android.view.MotionEvent.ACTION_DOWN -> {
+
+                    dX = view.x - event.rawX
+                    dY = view.y - event.rawY
+                    initialX = event.rawX
+                    initialY = event.rawY
+                    true
+                }
+                android.view.MotionEvent.ACTION_MOVE -> {
+                    // Cập nhật tọa độ của nút theo ngón tay
+                    view.animate()
+                        .x(event.rawX + dX)
+                        .y(event.rawY + dY)
+                        .setDuration(0)
+                        .start()
+                    true
+                }
+                android.view.MotionEvent.ACTION_UP -> {
+                    // Khi nhấc ngón tay lên, kiểm tra xem người dùng vừa "Bấm" hay "Kéo"
+                    val moveX = Math.abs(event.rawX - initialX)
+                    val moveY = Math.abs(event.rawY - initialY)
+
+                    if (moveX < CLICK_DRAG_TOLERANCE && moveY < CLICK_DRAG_TOLERANCE) {
+                        // Nếu ngón tay di chuyển rất ít -> Đây là thao tác CLICK
+                        showAiChatDialog()
+                    }
+                    // Nếu muốn nút tự dính vào lề màn hình (Snap to edge) thì viết thêm logic ở đây
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
     // ================= HÀM MỚI ĐƯỢC THÊM VÀO =================
@@ -95,7 +135,7 @@ class HomeFragment : Fragment() {
         bottomSheetDialog.setContentView(view)
 
         // Ánh xạ các nút bấm trong Menu
-        val switchTheme = view.findViewById<com.google.android.material.switchmaterial.SwitchMaterial>(R.id.switchTheme)
+        val switchTheme = view.findViewById<com.google.android.material.materialswitch.MaterialSwitch>(R.id.switchTheme)
         val llCurrencyLang = view.findViewById<View>(R.id.llCurrencyLang)
         val llAbout = view.findViewById<View>(R.id.llAbout)
 
@@ -111,7 +151,13 @@ class HomeFragment : Fragment() {
         // --- CHỨC NĂNG 2: Tiền tệ & Ngôn ngữ ---
         llCurrencyLang.setOnClickListener {
             bottomSheetDialog.dismiss()
-            Toast.makeText(requireContext(), "Tính năng đổi VNĐ -> USD đang được cập nhật!", Toast.LENGTH_SHORT).show()
+            com.example.expensemanager.utils.CurrencyUtils.toggleCurrency(requireContext())
+            val isUsd = com.example.expensemanager.utils.CurrencyUtils.isUSD(requireContext())
+            Toast.makeText(requireContext(), if (isUsd) "Đã chuyển sang USD" else "Đã chuyển sang VNĐ", Toast.LENGTH_SHORT).show()
+            
+            // Tải lại adapter để format lại tiền tệ
+            binding.rvTransactions.adapter = transactionAdapter
+            viewModel.loadTransactions()
         }
 
         // --- CHỨC NĂNG 3: Thông tin ứng dụng (About) ---
@@ -184,9 +230,9 @@ class HomeFragment : Fragment() {
                                     val totalIncome = currentMonthTransactions.filter { it.type == TransactionType.INCOME }.sumOf { it.amount }
                                     val totalExpense = currentMonthTransactions.filter { it.type == TransactionType.EXPENSE }.sumOf { it.amount }
 
-                                    binding.tvTotalIncome.text = currencyFormat.format(totalIncome)
-                                    binding.tvTotalExpense.text = currencyFormat.format(totalExpense)
-                                    binding.tvBalance.text = currencyFormat.format(totalIncome - totalExpense)
+                                    binding.tvTotalIncome.text = com.example.expensemanager.utils.CurrencyUtils.formatCurrency(requireContext(), totalIncome)
+                                    binding.tvTotalExpense.text = com.example.expensemanager.utils.CurrencyUtils.formatCurrency(requireContext(), totalExpense)
+                                    binding.tvBalance.text = com.example.expensemanager.utils.CurrencyUtils.formatCurrency(requireContext(), totalIncome - totalExpense)
                                 }
                             }
                             is Resource.Error -> {
@@ -233,7 +279,7 @@ class HomeFragment : Fragment() {
 
         val message = "Bạn muốn thêm giao dịch này?\n\n" +
                 "Nội dung: $title\n" +
-                "Số tiền: ${currencyFormat.format(amount)}\n" +
+                "Số tiền: ${com.example.expensemanager.utils.CurrencyUtils.formatCurrency(requireContext(), amount)}\n" +
                 "Danh mục: $category\n" +
                 "Loại: ${if (type == TransactionType.INCOME) "Thu nhập" else "Chi tiêu"}"
 
@@ -251,11 +297,49 @@ class HomeFragment : Fragment() {
                     note = "Nhập nhanh bằng AI",
                     userId = viewModel.getCurrentUserId() // Đảm bảo gán userId để lọc đa tài khoản
                 )
-                viewModel.addTransaction(newTransaction) // Bây giờ sẽ hết lỗi Unresolved
+                viewModel.addTransaction(newTransaction)
                 Toast.makeText(requireContext(), "Đã thêm thành công!", Toast.LENGTH_SHORT).show()
             }
             .setNegativeButton("Hủy", null)
             .show()
+    }
+
+    private fun showAiChatDialog() {
+        val bottomSheetDialog = com.google.android.material.bottomsheet.BottomSheetDialog(requireContext())
+        val view = layoutInflater.inflate(R.layout.dialog_ai_chat, null)
+        bottomSheetDialog.setContentView(view)
+
+        val rvChat = view.findViewById<RecyclerView>(R.id.rvChat)
+        val etChatInput = view.findViewById<android.widget.EditText>(R.id.etChatInput)
+        val btnSendChat = view.findViewById<android.widget.ImageButton>(R.id.btnSendChat)
+
+        val chatAdapter = ChatAdapter()
+        rvChat.adapter = chatAdapter
+        rvChat.layoutManager = LinearLayoutManager(requireContext())
+
+        // Cập nhật danh sách tin nhắn mượt mà
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.chatMessages.collect { messages ->
+                chatAdapter.submitList(messages)
+                if (messages.isNotEmpty()) {
+                    rvChat.scrollToPosition(messages.size - 1)
+                }
+            }
+        }
+
+        btnSendChat.setOnClickListener {
+            val msg = etChatInput.text.toString().trim()
+            if (msg.isNotEmpty()) {
+                // LẤY SỐ DƯ THẬT ĐƯA CHO AI
+                val currentBalance = binding.tvBalance.text.toString()
+                viewModel.sendChatMessage(msg, currentBalance)
+                etChatInput.text.clear()
+            }
+        }
+
+        // Ép BottomSheet mở rộng hết cỡ
+        bottomSheetDialog.behavior.state = com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
+        bottomSheetDialog.show()
     }
 
     override fun onDestroyView() {

@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="?attr/colorSurface"
-        app:elevation="0dp">
+        app:elevation="@dimen/elevation_none">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
@@ -32,7 +32,7 @@
         app:defaultNavHost="true"
         app:navGraph="@navigation/nav_graph"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:layout_marginBottom="80dp"/>
+        android:layout_marginBottom="@dimen/bottom_nav_height"/>
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"
@@ -40,31 +40,35 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:backgroundTint="?attr/colorSurface"
+        app:elevation="@dimen/elevation_lg"
         app:fabAlignmentMode="center"
-        app:fabCradleMargin="8dp"
-        app:fabCradleRoundedCornerRadius="16dp"
+        app:fabCradleMargin="10dp"
+        app:fabCradleRoundedCornerRadius="24dp"
         app:fabCradleVerticalOffset="8dp">
-
     </com.google.android.material.bottomappbar.BottomAppBar>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAdd"
+        style="?attr/floatingActionButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="Thêm giao dịch mới"
         android:src="@drawable/ic_add"
-        app:backgroundTint="#FFD54F"
         app:layout_anchor="@+id/bottomAppBar"
         app:layout_anchorGravity="center"
-        app:maxImageSize="32dp"
-        app:tint="#000000" />
+        app:maxImageSize="@dimen/icon_lg"
+        app:tint="@color/text_on_gradient"
+        app:elevation="@dimen/elevation_md"
+        app:hoveredFocusedTranslationZ="@dimen/elevation_lg"
+        app:pressedTranslationZ="@dimen/elevation_xl" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
+        style="?attr/bottomNavigationStyle"
         android:layout_width="match_parent"
         android:layout_height="112dp"
         android:background="@android:color/transparent"
-        app:elevation="0dp"
+        app:elevation="@dimen/elevation_none"
         app:layout_anchor="@+id/bottomAppBar"
         app:layout_anchorGravity="bottom|center"
         app:menu="@menu/bottom_nav_menu" />

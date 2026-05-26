@@ -3,76 +3,92 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?android:attr/colorBackground"
     android:orientation="vertical"
-    android:background="#FFFFFF"
-    android:padding="24dp">
+    android:padding="@dimen/spacing_xl">
 
     <TextView
+        style="?attr/textAppearanceHeadlineMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Quản lý Hạn mức"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="#1976D2"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="@dimen/spacing_lg"
+        android:text="Quản lý Hạn mức" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <com.google.android.material.card.MaterialCardView
+        style="?attr/materialCardViewStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Hạn mức chi tiêu tháng (VNĐ)">
+        android:layout_marginBottom="@dimen/spacing_xxl">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etMonthlyLimit"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:orientation="vertical"
+            android:padding="@dimen/spacing_lg">
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="?attr/textInputStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Hạn mức chi tiêu tháng (VNĐ)">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etMonthlyLimit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                style="?attr/textAppearanceLabelSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_sm"
+                android:text="Sẽ cảnh báo khi tổng chi vượt quá số tiền này." />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
     <TextView
+        style="?attr/textAppearanceHeadlineMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sẽ cảnh báo khi tổng chi vượt quá số tiền này."
-        android:textSize="12sp"
-        android:textColor="#757575"
-        android:layout_marginBottom="32dp"
-        android:layout_marginTop="4dp"/>
+        android:layout_marginBottom="@dimen/spacing_lg"
+        android:text="Thông báo &amp; Nhắc nhở" />
 
-    <View
+    <com.google.android.material.card.MaterialCardView
+        style="?attr/materialCardViewStyle"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#EEEEEE"
-        android:layout_marginBottom="24dp"/>
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Thông báo &amp; Nhắc nhở"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="#1976D2"
-        android:layout_marginBottom="16dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/spacing_lg"
+            android:paddingVertical="@dimen/spacing_md">
 
-    <com.google.android.material.materialswitch.MaterialSwitch
-        android:id="@+id/switchReminder"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Nhắc nhở nhập liệu cuối ngày"
-        android:textColor="#212121"
-        android:textSize="16sp"
-        android:checked="true" />
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/switchReminder"
+                style="?attr/materialSwitchStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:paddingVertical="@dimen/spacing_md"
+                android:text="Nhắc nhở nhập liệu cuối ngày"
+                android:textAppearance="?attr/textAppearanceBodyLarge" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
     <Space
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnSaveSettings"
+        style="@style/Widget.App.Button.Gradient"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:text="LƯU CÀI ĐẶT"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="16dp"/>
+        android:layout_height="@dimen/button_height_lg"
+        android:layout_marginBottom="@dimen/spacing_lg"
+        android:text="LƯU CÀI ĐẶT" />
 </LinearLayout>

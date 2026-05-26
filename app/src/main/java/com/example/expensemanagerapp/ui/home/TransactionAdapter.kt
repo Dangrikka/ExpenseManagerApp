@@ -33,7 +33,6 @@ class TransactionAdapter : ListAdapter<TransactionModel, TransactionAdapter.Tran
         RecyclerView.ViewHolder(binding.root) {
 
         private val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-        private val currencyFormat = NumberFormat.getCurrencyInstance(Locale("vi", "VN"))
 
         fun bind(transaction: TransactionModel) {
             binding.apply {
@@ -44,13 +43,13 @@ class TransactionAdapter : ListAdapter<TransactionModel, TransactionAdapter.Tran
 
                 // SỬA LỖI Ở ĐÂY: Dùng ivCategoryIcon (ImageView) thay vì tvCategoryIcon
                 if (transaction.type == TransactionType.INCOME) {
-                    tvAmount.text = "+ ${currencyFormat.format(transaction.amount)}"
+                    tvAmount.text = "+ ${com.example.expensemanager.utils.CurrencyUtils.formatCurrency(itemView.context, transaction.amount)}"
                     tvAmount.setTextColor(Color.parseColor("#4CAF50")) // Màu xanh lá
 
                     // Gán icon mặc định của hệ thống cho giao dịch THU
                     ivCategoryIcon.setImageResource(android.R.drawable.ic_input_add)
                 } else {
-                    tvAmount.text = "- ${currencyFormat.format(transaction.amount)}"
+                    tvAmount.text = "- ${com.example.expensemanager.utils.CurrencyUtils.formatCurrency(itemView.context, transaction.amount)}"
                     tvAmount.setTextColor(Color.parseColor("#F44336")) // Màu đỏ
 
                     // Gán icon mặc định của hệ thống cho giao dịch CHI

@@ -3,43 +3,82 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/colorSurface"
+    android:background="@drawable/bottom_sheet_background"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="@dimen/spacing_xl">
+
+    <!-- Handle -->
+    <View
+        android:layout_width="40dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/spacing_lg"
+        android:background="@drawable/shape_pill_badge"
+        android:backgroundTint="?attr/colorOutlineVariant" />
 
     <TextView
-        android:layout_width="match_parent"
+        style="?attr/textAppearanceHeadlineMedium"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="Cài đặt hệ thống"
-        android:textColor="?attr/colorOnSurface"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:layout_marginBottom="@dimen/spacing_lg"
+        android:text="Tùy chọn" />
 
     <LinearLayout
+        android:id="@+id/llCurrencyLang"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingVertical="12dp">
+        android:paddingVertical="@dimen/spacing_md"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true">
 
         <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@android:drawable/ic_menu_month"
+            android:layout_width="@dimen/icon_md"
+            android:layout_height="@dimen/icon_md"
+            android:src="@android:drawable/ic_menu_sort_by_size"
             app:tint="?attr/colorOnSurface" />
 
         <TextView
+            style="?attr/textAppearanceBodyLarge"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="@dimen/spacing_md"
             android:layout_weight="1"
-            android:text="Giao diện Tối (Dark Mode)"
-            android:textColor="?attr/colorOnSurface"
-            android:textSize="16sp" />
+            android:text="Chuyển đổi tiền tệ (VNĐ/USD)" />
+    </LinearLayout>
 
-        <com.google.android.material.switchmaterial.SwitchMaterial
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider_color" />
+
+    <LinearLayout
+        android:id="@+id/llTheme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingVertical="@dimen/spacing_md">
+
+        <ImageView
+            android:layout_width="@dimen/icon_md"
+            android:layout_height="@dimen/icon_md"
+            android:src="@android:drawable/ic_menu_edit"
+            app:tint="?attr/colorOnSurface" />
+
+        <TextView
+            style="?attr/textAppearanceBodyLarge"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_md"
+            android:layout_weight="1"
+            android:text="Giao diện tối (Dark Mode)" />
+
+        <com.google.android.material.materialswitch.MaterialSwitch
             android:id="@+id/switchTheme"
+            style="?attr/materialSwitchStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -47,62 +86,31 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#E0E0E0" />
-
-    <LinearLayout
-        android:id="@+id/llCurrencyLang"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackground"
-        android:clickable="true"
-        android:focusable="true"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingVertical="16dp">
-
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@android:drawable/ic_menu_sort_alphabetically"
-            app:tint="?attr/colorOnSurface" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="Ngôn ngữ &amp; Tiền tệ (VNĐ/USD)"
-            android:textColor="?attr/colorOnSurface"
-            android:textSize="16sp" />
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#E0E0E0" />
+        android:background="@color/divider_color" />
 
     <LinearLayout
         android:id="@+id/llAbout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackground"
-        android:clickable="true"
-        android:focusable="true"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingVertical="16dp">
+        android:paddingVertical="@dimen/spacing_lg"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true">
 
         <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="@dimen/icon_md"
+            android:layout_height="@dimen/icon_md"
             android:src="@android:drawable/ic_menu_info_details"
             app:tint="?attr/colorOnSurface" />
 
         <TextView
+            style="?attr/textAppearanceBodyLarge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="Thông tin ứng dụng"
-            android:textColor="?attr/colorOnSurface"
-            android:textSize="16sp" />
+            android:layout_marginStart="@dimen/spacing_md"
+            android:text="Giới thiệu" />
     </LinearLayout>
+
 </LinearLayout>

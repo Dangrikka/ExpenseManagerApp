@@ -33,8 +33,6 @@ class ReportFragment : Fragment() {
     // Dùng ReportViewModel để gọi AI Groq
     private val reportViewModel: ReportViewModel by viewModels()
 
-    private val currencyFormat = NumberFormat.getCurrencyInstance(Locale("vi", "VN"))
-
     private lateinit var categoryAdapter: CategoryReportAdapter
     private var selectedCalendar = Calendar.getInstance()
 
@@ -151,9 +149,11 @@ class ReportFragment : Fragment() {
                                 val totalIncome = filteredList.filter { it.type.name == "INCOME" }.sumOf { it.amount }
                                 val totalExpense = filteredList.filter { it.type.name == "EXPENSE" }.sumOf { it.amount }
 
-                                binding.tvNetWorth.text = currencyFormat.format(totalIncome - totalExpense)
-                                binding.tvTotalIncome.text = "+${currencyFormat.format(totalIncome)}"
-                                binding.tvTotalExpense.text = "-${currencyFormat.format(totalExpense)}"
+                                binding.tvNetWorth.text = com.example.expensemanager.utils.CurrencyUtils.formatCurrency(requireContext(), totalIncome - totalExpense)
+                                binding.tvTotalIncome.text = "+${com.example.expensemanager.utils.CurrencyUtils.formatCurrency(requireContext(), totalIncome)}"
+                                binding.tvTotalExpense.text = "-${com.example.expensemanager.utils.CurrencyUtils.formatCurrency(requireContext(), totalExpense)}"
+
+                                setupBarChart(totalIncome, totalExpense)
 
                                 val expensesOnly = filteredList.filter { it.type.name == "EXPENSE" }
                                 val categoryReportList = expensesOnly.groupBy { it.category }
@@ -197,6 +197,56 @@ class ReportFragment : Fragment() {
                     }
                 }
             }
+        }
+    }
+
+    private fun setupBarChart(totalIncome: Double, totalExpense: Double) {
+        if (totalIncome == 0.0 && totalExpense == 0.0) {
+            binding.barChart.clear()
+            binding.barChart.setNoDataText("Chưa có dữ liệu cho tháng này")
+            return
+        }
+
+        val entries = ArrayList<com.github.mikephil.charting.data.BarEntry>()
+        entries.add(com.github.mikephil.charting.data.BarEntry(0f, totalIncome.toFloat()))
+        entries.add(com.github.mikephil.charting.data.BarEntry(1f, totalExpense.toFloat()))
+
+        val dataSet = com.github.mikephil.charting.data.BarDataSet(entries, "Thu Chi")
+        dataSet.colors = listOf(
+            android.graphics.Color.parseColor("#4CAF50"), // Thu (Xanh)
+            android.graphics.Color.parseColor("#F44336")  // Chi (Đỏ)
+        )
+        dataSet.valueTextSize = 12f
+        dataSet.valueTextColor = android.graphics.Color.parseColor("#757575")
+
+        val barData = com.github.mikephil.charting.data.BarData(dataSet)
+        barData.barWidth = 0.5f
+
+        binding.barChart.apply {
+            data = barData
+            description.isEnabled = false
+            setDrawGridBackground(false)
+            setDrawBorders(false)
+
+            // Trục X
+            xAxis.position = com.github.mikephil.charting.components.XAxis.XAxisPosition.BOTTOM
+            xAxis.setDrawGridLines(false)
+            xAxis.granularity = 1f
+            xAxis.valueFormatter = object : com.github.mikephil.charting.formatter.ValueFormatter() {
+                override fun getFormattedValue(value: Float): String {
+                    return if (value == 0f) "Tổng thu" else if (value == 1f) "Tổng chi" else ""
+                }
+            }
+
+            // Trục Y
+            axisLeft.setDrawGridLines(true)
+            axisLeft.axisMinimum = 0f
+            axisLeft.textColor = android.graphics.Color.parseColor("#757575")
+            axisRight.isEnabled = false
+
+            legend.isEnabled = false
+            animateY(1000)
+            invalidate()
         }
     }
 

@@ -59,8 +59,7 @@ class TransactionDetailFragment : Fragment() {
             binding.tvCategory.text = category
             binding.tvNote.text = if (note.isNullOrBlank()) "Không có ghi chú" else note
 
-            val currencyFormat = NumberFormat.getNumberInstance(Locale("vi", "VN"))
-            binding.tvAmount.text = "${currencyFormat.format(amount)} đ"
+            binding.tvAmount.text = com.example.expensemanager.utils.CurrencyUtils.formatCurrency(requireContext(), amount)
 
             if (type == "INCOME" || type == "THU") {
                 binding.tvType.text = "Thu nhập"

@@ -107,14 +107,17 @@ class SearchFragment : Fragment() {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.searchResults.collect { results ->
                     transactionAdapter.submitList(results)
+                    val query = binding.etSearch.text?.toString()?.trim() ?: ""
 
-                    // Cập nhật giao diện Trống nếu không có kết quả
-                    if (results.isEmpty()) {
-                        binding.emptyStateLayout.visibility = View.VISIBLE
-                        binding.rvSearchResults.visibility = View.GONE
-                    } else {
-                        binding.emptyStateLayout.visibility = View.GONE
-                        binding.rvSearchResults.visibility = View.VISIBLE
+                    // Cập nhật giao diện Trống nếu không có kết quả và đang tìm kiếm
+                    if (query.isNotEmpty()) {
+                        if (results.isEmpty()) {
+                            binding.emptyStateLayout.visibility = View.VISIBLE
+                            binding.rvSearchResults.visibility = View.GONE
+                        } else {
+                            binding.emptyStateLayout.visibility = View.GONE
+                            binding.rvSearchResults.visibility = View.VISIBLE
+                        }
                     }
                 }
             }

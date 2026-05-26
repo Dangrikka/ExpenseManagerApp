@@ -69,7 +69,10 @@ class AddTransactionFragment : Fragment() {
                 oldCategory = bundle.getString("category") ?: "Khác"
 
                 binding.etTitle.setText(title)
-                binding.etAmount.setText(amount.toLong().toString())
+                
+                val displayAmount = com.example.expensemanager.utils.CurrencyUtils.convertBaseToDisplay(requireContext(), amount)
+                val displayStr = if (displayAmount % 1 == 0.0) displayAmount.toLong().toString() else displayAmount.toString()
+                binding.etAmount.setText(displayStr)
                 binding.etNote.setText(note)
                 binding.etCategory.setText(oldCategory, false)
 
@@ -90,6 +93,9 @@ class AddTransactionFragment : Fragment() {
             val amountStr = binding.etAmount.text.toString().trim()
             val note = binding.etNote.text.toString().trim()
 
+            val inputAmount = amountStr.toDoubleOrNull() ?: 0.0
+            val baseAmount = com.example.expensemanager.utils.CurrencyUtils.parseInputToBaseCurrency(requireContext(), inputAmount)
+
             // LẤY GIÁ TRỊ TỪ Ô DANH MỤC MỚI
             val category = binding.etCategory.text.toString()
 
@@ -99,18 +105,18 @@ class AddTransactionFragment : Fragment() {
                 "EXPENSE"
             }
 
-            if (currentTransactionId > 0) { // Sửa từ != null thành > 0
+            if (currentTransactionId > 0) {
                 viewModel.updateTransaction(
-                    id = currentTransactionId, // Truyền thẳng Int vào
+                    id = currentTransactionId,
                     title = title,
-                    amountStr = amountStr,
+                    amount = baseAmount,
                     typeStr = type,
                     note = note,
                     oldDate = oldDate,
                     oldCategory = category
                 )
             } else {
-                viewModel.saveTransaction(title, amountStr, type, note, category)
+                viewModel.saveTransaction(title, baseAmount, type, note, category)
             }
         }
     }
@@ -151,6 +157,10 @@ class AddTransactionFragment : Fragment() {
         binding.ivBack.setOnClickListener {
             findNavController().popBackStack()
         }
+
+        val isUsd = com.example.expensemanager.utils.CurrencyUtils.isUSD(requireContext())
+        binding.etAmountLayout.prefixText = if (isUsd) "$ " else "đ "
+        binding.etAmountLayout.hint = if (isUsd) "Số tiền (USD)" else "Số tiền (VNĐ)"
 
         // Đổi tiêu đề nếu là chế độ Sửa
         if (currentTransactionId != null) {

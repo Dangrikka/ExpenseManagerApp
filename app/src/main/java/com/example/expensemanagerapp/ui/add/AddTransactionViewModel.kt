@@ -22,11 +22,10 @@ class AddTransactionViewModel @Inject constructor(
     private val _addState = MutableStateFlow<Resource<Boolean>?>(null)
     val addState: StateFlow<Resource<Boolean>?> = _addState
 
-    fun saveTransaction(title: String, amountStr: String, typeStr: String, note: String, category: String) {
+    fun saveTransaction(title: String, amount: Double, typeStr: String, note: String, category: String) {
         viewModelScope.launch {
             _addState.value = Resource.Loading()
             try {
-                val amount = amountStr.toDoubleOrNull() ?: 0.0
                 if (title.isBlank() || amount <= 0) {
                     _addState.value = Resource.Error("Vui lòng nhập tên và số tiền hợp lệ")
                     return@launch
@@ -58,11 +57,10 @@ class AddTransactionViewModel @Inject constructor(
         }
     }
 
-    fun updateTransaction(id: Int, title: String, amountStr: String, typeStr: String, note: String, oldDate: Long, oldCategory: String) {
+    fun updateTransaction(id: Int, title: String, amount: Double, typeStr: String, note: String, oldDate: Long, oldCategory: String) {
         viewModelScope.launch {
             _addState.value = Resource.Loading()
             try {
-                val amount = amountStr.toDoubleOrNull() ?: 0.0
                 val typeEnum = if (typeStr == "INCOME" || typeStr == "THU") TransactionType.INCOME else TransactionType.EXPENSE
 
                 // Lấy UID người dùng hiện tại
